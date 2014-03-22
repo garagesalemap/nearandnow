@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/Layout.js"></script>
+<ul class="navigation">
+    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Add", "AddNew", "Home")</li>
+    <li>@Html.ActionLink("About", "About", "Home")</li>
+</ul>
+<div id="body">
+    <div id="map-canvas"></div>
+</div>

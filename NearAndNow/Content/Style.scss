@@ -1,0 +1,123 @@
+@import "mixin";
+
+header {
+	height: 50px;
+	position: absolute;
+	top: 0;
+	bottom: auto;
+	left: 0;
+	right: 0;
+	background: #f9f9f9;
+}
+
+body {
+	font-size: 1.5em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+	color: #333;
+		
+}
+
+#map-canvas {
+	height: 100%;
+}
+#body {
+	margin: 4px 0;
+	border: 1px solid #ccc;
+	@include border-radius(4px);
+	position: absolute;
+	top: 90px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+
+	.title {
+		font-weight: bold;
+        margin: 10px 20px;
+        font-size: 18px;
+	}
+
+	ul.inputForm {
+		padding: 0;
+		margin: 0 20px;
+		font-size: 1em;
+
+		li {
+			list-style: none;
+			margin: 0 0 5px 0;
+		}
+
+		label {
+			text-align: left;
+			margin: 0;
+		}
+
+		li.buttonList {
+			margin-top: 10px;
+		}
+	}
+
+	.alert {
+		margin: 20px;
+	}
+	.backButton {
+		position: relative;
+		left: 35%;
+		text-shadow: none;
+		color: white;
+	}
+
+	input, textarea {
+		margin: 0;
+	}
+}
+
+.ui-content {
+	padding: 0 10px !important;
+}
+
+ul.navigation {
+	margin: 0;
+	padding: 0;
+	li {
+		float: left;
+		list-style: none;
+		border-right: 1px solid #ccc;
+		height: 50px;
+		@include background-gradient(#999, #fff);
+		padding: 0;
+		color: #333;
+
+		a {
+			color: inherit !important;
+			text-shadow: none !important;
+			height: 100% !important;
+			width: 100% !important;
+			display: block;
+			padding: 10px;
+		}
+	}
+
+	li:hover {
+        @include background-gradient(#2489ce, #305F7F);
+		color: white;
+    }
+	
+    li.active {
+        @include background-gradient(#2489ce, #305F7F);
+        color: white;
+    }
+}
+
+footer {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: auto;
+	height: 0;
+	background: #f9f9f9;
+}
+
+@media (max-width: 480px) { 
+}

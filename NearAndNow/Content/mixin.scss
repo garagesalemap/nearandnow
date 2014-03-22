@@ -1,0 +1,36 @@
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin box-shadow($value) {
+	-moz-box-shadow:    $value;
+	-webkit-box-shadow: $value;
+	box-shadow:         $value;
+}
+
+@mixin box-sizing($value) {
+	-webkit-box-sizing: $value;
+    -moz-box-sizing: $value;
+    box-sizing: $value;
+}
+
+@mixin background-gradient($startColor, $endColor) {
+	background: -webkit-gradient($startColor, $endColor);
+	background: -webkit-linear-gradient($startColor, $endColor);
+	background: -moz-linear-gradient($startColor, $endColor);
+	backgournd: -ms-linear-gradient($startColor, $endColor);
+	background: -o-linear-gradient($startColor, $endColor);
+	background: linear-gradient($startColor, $endColor);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=" + $startColor +", endColorstr=" + $endColor + ")";
+	filter: unquote("progid:DXImageTransform.Microsoft.gradient(startColorstr=" + $startColor +", endColorstr=" + $endColor + ")");
+}
+
+@mixin transition($x) {
+	-webkit-transition: $x;
+	-moz-transition: $x;
+	-o-transition: $x;
+	transition: $x;
+}

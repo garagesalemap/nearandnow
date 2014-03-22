@@ -1,0 +1,43 @@
+﻿@model NearAndNow.Models.SaleModel
+
+@{
+    ViewBag.Title = "Add";
+}
+<ul class="navigation">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">@Html.ActionLink("Add", "AddNew", "Home")</li>
+    <li>@Html.ActionLink("About", "About", "Home")</li>
+</ul>
+<div id="body">
+    <form action="/Home/AddNew" method="post" id="addNewForm">
+        <ul class="inputForm">
+            <li>
+                <label>Title</label>
+                @Html.TextBoxFor(model => model.Title, new { maxlength = 50 })
+            </li>
+            <li>
+                <label>Description</label>
+                @Html.TextAreaFor(model => model.Description, new { maxlength = 150 })
+            </li>
+            <li>
+                <label>Address</label>
+                @Html.TextBoxFor(model => model.Address, new { maxlength = 150 })
+                @Html.ValidationMessageFor(model => model.Address)
+            </li>
+            <li>
+                <label>Date</label>
+                @Html.TextBoxFor(model => model.SaleDate, new { maxlength = 50, type = "datetime-local" })
+                
+            </li>
+            <li>
+                <label>Url</label>
+                @Html.TextBoxFor(model => model.LinkUrl, new { maxlength = 150 })
+                <p>(gumtree / facebook event)</p>
+            </li>
+            <li class="buttonList">
+                <input type="submit" class="btn btn-primary" value="Submit" />
+            </li>
+        </ul>
+    </form>
+</div>
+Bei Yang

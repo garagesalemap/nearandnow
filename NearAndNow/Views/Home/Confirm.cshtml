@@ -1,0 +1,20 @@
+﻿@model NearAndNow.Models.SaleModel
+
+@{
+    ViewBag.Title = "Add";
+}
+<ul class="navigation">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">@Html.ActionLink("Add", "AddNew", "Home")</li>
+    <li>@Html.ActionLink("About", "About", "Home")</li>
+</ul>
+<div id="body">
+    <div class="title">CONFIRMATION</div>
+    <div class="alert alert-info">
+        <strong>Thank you!</strong></br>
+        We have added your garage sale to the map with the code number @Model.Id .
+        <address>Any immediate questions or edits please email
+            <a href="mailto:hellogaragesalemap@gmail.com">hellogaragesalemap@gmail.com</a></address>
+    </div>
+    <a href="/Home/Index" class="btn btn-primary backButton">Back to Map</a>
+</div>
