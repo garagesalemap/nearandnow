@@ -29,19 +29,17 @@ namespace NearAndNow.Controllers
 		}
 
 		/// <summary>
-		/// get the list of sales for today0
+		/// get the list of sales for today
 		/// Called from the map page to populate the map
 		/// </summary>
 		/// <returns></returns>
 		public ActionResult GetSalesList()
 		{
 			DateTime searchDate = DateTime.Today;
-			string jsonData = GetSalesListByDate(searchDate);
-
 			// save the starting date
 			Session["SearchDate"] = searchDate;
 
-			return Content(jsonData, "application/json");
+            return Json(GetSalesListByDate(searchDate));
 		}
 
 		/// <summary>
@@ -54,14 +52,11 @@ namespace NearAndNow.Controllers
 			DateTime searchDate = DateTime.Parse(Session["SearchDate"].ToString());
 
 			// now increment or decrement the searchdate by the step value
-			searchDate.AddDays(vStep);
-
-			string jsonData = GetSalesListByDate(searchDate);
-
+            searchDate = searchDate.AddDays(vStep);
 			// save the new date
 			Session["SearchDate"] = searchDate;
 
-			return Content(jsonData, "application/json");
+			return Json(GetSalesListByDate(searchDate));
 		}
 
 		public ActionResult AddNew()
@@ -125,7 +120,7 @@ namespace NearAndNow.Controllers
 			newSale.Title = vItem.Title;
 			newSale.Description = vItem.Description;
 			newSale.Address = vItem.Address;
-			newSale.LatLong = vItem.LatLong;
+            newSale.LatLong = "10000,20000";//			vItem.LatLong;
 			newSale.SaleDate = vItem.SaleDate;
 			newSale.LinkUrl = vItem.LinkUrl;
 
@@ -137,7 +132,7 @@ namespace NearAndNow.Controllers
 		/// </summary>
 		/// <param name="searchDate"></param>
 		/// <returns></returns>
-		private string GetSalesListByDate(DateTime searchDate)
+        private SaleListAndSearchDate GetSalesListByDate(DateTime searchDate)
 		{
 			SaleService salesService = new SaleService();
 
@@ -146,11 +141,11 @@ namespace NearAndNow.Controllers
 			List<SaleModel> viewList = saleList.Select(s => MapSaleToSaleModel(s)).ToList();
 
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			string jsonData = js.Serialize(viewList);
+            SaleListAndSearchDate jsonData = new SaleListAndSearchDate() { SaleList = viewList, SearchDate = searchDate.ToShortDateString() };
 			return jsonData;
-		} //GetSalesListByDate
+		} 
 
 		#endregion Private methods
 
-	} //class HomeController 
-} //namespace NearAndNow.Controllers
+	}
+}

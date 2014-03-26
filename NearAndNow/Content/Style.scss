@@ -18,18 +18,37 @@ body {
 }
 
 #map-canvas {
-	height: 100%;
+	position: absolute;
+	top: 46px;
+	height: auto;
+	bottom: 0;
+	left: 0px;
+	right: 0px;
 }
 #body {
 	margin: 4px 0;
 	border: 1px solid #ccc;
 	@include border-radius(4px);
 	position: absolute;
-	top: 90px;
+	top: 46px;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	overflow: auto;
+
+	.timebanner {
+		text-align: center;
+		padding-top: 5px;
+        background: #ccc;
+        padding-bottom: 5px;
+
+		.btn {
+			span {
+				color: white !important;
+			}
+		}
+		
+	}
 
 	.title {
 		font-weight: bold;
@@ -50,10 +69,12 @@ body {
 		label {
 			text-align: left;
 			margin: 0;
+			display: block;
 		}
 
 		li.buttonList {
 			margin-top: 10px;
+			max-width: 500px;
 		}
 	}
 
@@ -69,6 +90,8 @@ body {
 
 	input, textarea {
 		margin: 0;
+		max-width: 500px;
+		width: 100%;
 	}
 }
 
@@ -117,7 +140,4 @@ footer {
 	top: auto;
 	height: 0;
 	background: #f9f9f9;
-}
-
-@media (max-width: 480px) { 
 }

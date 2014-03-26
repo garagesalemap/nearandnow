@@ -1,12 +1,19 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<script src="~/Scripts/Layout.js"></script>
+<script src="~/Scripts/Map.js"></script>
 <ul class="navigation">
     <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
     <li>@Html.ActionLink("Add", "AddNew", "Home")</li>
     <li>@Html.ActionLink("About", "About", "Home")</li>
 </ul>
 <div id="body">
+    <div class="timebanner">
+        <a class="btn btn-primary" data-bind="click: loadPreviousDaySale">
+            <span class="glyphicon glyphicon-minus"></span>
+        </a>
+        <span data-bind="text: currentDate"></span>
+        <a class="btn btn-primary" data-bind="click: loadNextDaySale"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
     <div id="map-canvas"></div>
 </div>
