@@ -15,7 +15,8 @@ loadPreviousDaySale = function () {
         loadMarker();
     })
     .error(function (xhr, textStatus, errorThrown) {
-        alert(xhr.status + "" + errorThrown);
+        alert(xhr.status + " " + errorThrown);
+        loadMarker();
     });
 },
 loadNextDaySale = function () {
@@ -32,7 +33,8 @@ loadNextDaySale = function () {
         loadMarker();
     })
     .error(function (xhr, textStatus, errorThrown) {
-        alert(xhr.status + "" + errorThrown);
+        alert(xhr.status + " " + errorThrown);
+        loadMarker();
     });
 },
 viewModel = {
@@ -60,7 +62,8 @@ function loadSaleList() {
         loadMarker();
     })
     .error(function (xhr, textStatus, errorThrown) {
-        alert(xhr.status + "" + errorThrown);
+        alert(xhr.status + " " + errorThrown);
+        loadMarker();
     });
   
 }
