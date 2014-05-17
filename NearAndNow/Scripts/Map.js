@@ -9,9 +9,9 @@ loadPreviousDaySale = function () {
             vStep: -1
         }
     })
-    .success(function (data) {
-        saleList = data.SaleList;
-        currentDate(data.SearchDate);
+    .success(function (returnValue) {
+        saleList = returnValue.Data.SaleList;
+        currentDate(returnValue.Data.SearchDate);
         loadMarker();
     })
     .error(function (xhr, textStatus, errorThrown) {
@@ -27,9 +27,9 @@ loadNextDaySale = function () {
             vStep: +1
         }
     })
-    .success(function (data) {
-        saleList = data.SaleList;
-        currentDate(data.SearchDate);
+    .success(function (returnValue) {
+        saleList = returnValue.Data.SaleList;
+        currentDate(returnValue.Data.SearchDate);
         loadMarker();
     })
     .error(function (xhr, textStatus, errorThrown) {
@@ -56,9 +56,9 @@ function loadSaleList() {
         type: "POST",
         url: "/Home/GetSalesList",
     })
-    .success(function (data) {
-        saleList = data.SaleList;
-        currentDate(data.SearchDate);
+    .success(function (returnValue) {
+        saleList = returnValue.Data.SaleList;
+        currentDate(returnValue.Data.SearchDate);
         loadMarker();
     })
     .error(function (xhr, textStatus, errorThrown) {
