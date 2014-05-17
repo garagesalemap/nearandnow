@@ -36,17 +36,26 @@ namespace NearAndNow.Business
 		/// <returns></returns>
 		public List<Sale> ListSalesByDate(DateTime vSearchDate)
 		{
-			List<Sale> returnList = new List<Sale>();
-			NANEntities dbContext = new NANEntities();
+            List<Sale> returnList = new List<Sale>();
 
-			// get the date from the searchdate and tomorrow in order to bracket the search interval
-			DateTime justDate = vSearchDate.Date;
-			DateTime plusOneDay = justDate.AddDays(1);
+            try
+            {
+                NANEntities dbContext = new NANEntities();
 
-			var query = dbContext.Sales.Where(s => EntityFunctions.TruncateTime(s.SaleDate) >= justDate && EntityFunctions.TruncateTime(s.SaleDate) < plusOneDay)
-												.Select(s => s);
+                // get the date from the searchdate and tomorrow in order to bracket the search interval
+                DateTime justDate = vSearchDate.Date;
+                DateTime plusOneDay = justDate.AddDays(1);
 
-			returnList = query.ToList();
+                var query = dbContext.Sales.Where(s => EntityFunctions.TruncateTime(s.SaleDate) >= justDate && EntityFunctions.TruncateTime(s.SaleDate) < plusOneDay)
+                                                    .Select(s => s);
+
+                returnList = query.ToList();
+            }
+            catch (Exception ex)
+            {
+
+                Debug.Write("error occured" + ex.Message);
+            }
 
 			return returnList;
 		} //ListSalesByDate
