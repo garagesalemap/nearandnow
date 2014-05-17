@@ -10,6 +10,15 @@ namespace NearAndNow.Business
 {
 	public class SaleService
 	{
+        private string mLastErrorMessage = string.Empty;
+
+        public string LastErrorMessage { get { return mLastErrorMessage; } }
+
+        public SaleService()
+        {
+            mLastErrorMessage = string.Empty;
+        }
+
 		public bool SaveNewSale(Sale vSale)
 		{
 			bool returnStatus = true;
@@ -22,8 +31,8 @@ namespace NearAndNow.Business
 			}
 			catch (Exception ex)
 			{
-				Debug.Write(ex.Message);
-				returnStatus = false;
+                mLastErrorMessage = "error occurred" + ex.Message;
+                returnStatus = false;
 			}
 
 			return returnStatus;
@@ -36,17 +45,25 @@ namespace NearAndNow.Business
 		/// <returns></returns>
 		public List<Sale> ListSalesByDate(DateTime vSearchDate)
 		{
-			List<Sale> returnList = new List<Sale>();
-			NANEntities dbContext = new NANEntities();
+            List<Sale> returnList = new List<Sale>();
 
-			// get the date from the searchdate and tomorrow in order to bracket the search interval
-			DateTime justDate = vSearchDate.Date;
-			DateTime plusOneDay = justDate.AddDays(1);
+            try
+            {
+                NANEntities dbContext = new NANEntities();
 
-			var query = dbContext.Sales.Where(s => EntityFunctions.TruncateTime(s.SaleDate) >= justDate && EntityFunctions.TruncateTime(s.SaleDate) < plusOneDay)
-												.Select(s => s);
+                // get the date from the searchdate and tomorrow in order to bracket the search interval
+                DateTime justDate = vSearchDate.Date;
+                DateTime plusOneDay = justDate.AddDays(1);
 
-			returnList = query.ToList();
+                var query = dbContext.Sales.Where(s => EntityFunctions.TruncateTime(s.SaleDate) >= justDate && EntityFunctions.TruncateTime(s.SaleDate) < plusOneDay)
+                                                    .Select(s => s);
+
+                returnList = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                mLastErrorMessage = "error occurred" + ex.Message;
+            }
 
 			return returnList;
 		} //ListSalesByDate
@@ -57,8 +74,18 @@ namespace NearAndNow.Business
 		/// <returns></returns>
 		public Sale GetNewSale()
 		{
-			NANEntities dbContext = new NANEntities();
-			return dbContext.Sales.Create();
+            Sale returnValue;
+            try
+            {
+                NANEntities dbContext = new NANEntities();
+                returnValue = dbContext.Sales.Create();
+            }
+            catch (Exception ex)
+            {
+                returnValue = null;
+                mLastErrorMessage = "error occurred" + ex.Message;
+            }
+            return returnValue;
 		}
 	} //class SaleService
        
