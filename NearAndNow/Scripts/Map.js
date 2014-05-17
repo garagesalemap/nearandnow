@@ -14,8 +14,8 @@ loadPreviousDaySale = function () {
         currentDate(data.SearchDate);
         loadMarker();
     })
-    .error(function (error) {
-        alert("error");
+    .error(function (xhr, textStatus, errorThrown) {
+        alert(xhr.status + "" + errorThrown);
     });
 },
 loadNextDaySale = function () {
@@ -31,8 +31,8 @@ loadNextDaySale = function () {
         currentDate(data.SearchDate);
         loadMarker();
     })
-    .error(function (error) {
-        alert("error");
+    .error(function (xhr, textStatus, errorThrown) {
+        alert(xhr.status + "" + errorThrown);
     });
 },
 viewModel = {
@@ -59,8 +59,8 @@ function loadSaleList() {
         currentDate(data.SearchDate);
         loadMarker();
     })
-    .error(function (error) {
-        alert("error");
+    .error(function (xhr, textStatus, errorThrown) {
+        alert(xhr.status + "" + errorThrown);
     });
   
 }

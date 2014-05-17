@@ -10,6 +10,15 @@ namespace NearAndNow.Business
 {
 	public class SaleService
 	{
+        private string mLastErrorMessage = string.Empty;
+
+        public string LastErrorMessage { get { return mLastErrorMessage; } }
+
+        public SaleService()
+        {
+            mLastErrorMessage = string.Empty;
+        }
+
 		public bool SaveNewSale(Sale vSale)
 		{
 			bool returnStatus = true;
@@ -22,8 +31,8 @@ namespace NearAndNow.Business
 			}
 			catch (Exception ex)
 			{
-				Debug.Write(ex.Message);
-				returnStatus = false;
+                mLastErrorMessage = "error occurred" + ex.Message;
+                returnStatus = false;
 			}
 
 			return returnStatus;
@@ -53,8 +62,7 @@ namespace NearAndNow.Business
             }
             catch (Exception ex)
             {
-
-                Debug.Write("error occured" + ex.Message);
+                mLastErrorMessage = "error occurred" + ex.Message;
             }
 
 			return returnList;
@@ -66,8 +74,18 @@ namespace NearAndNow.Business
 		/// <returns></returns>
 		public Sale GetNewSale()
 		{
-			NANEntities dbContext = new NANEntities();
-			return dbContext.Sales.Create();
+            Sale returnValue;
+            try
+            {
+                NANEntities dbContext = new NANEntities();
+                returnValue = dbContext.Sales.Create();
+            }
+            catch (Exception ex)
+            {
+                returnValue = null;
+                mLastErrorMessage = "error occurred" + ex.Message;
+            }
+            return returnValue;
 		}
 	} //class SaleService
        

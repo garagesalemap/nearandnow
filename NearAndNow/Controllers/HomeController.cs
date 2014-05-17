@@ -132,18 +132,28 @@ namespace NearAndNow.Controllers
 		/// </summary>
 		/// <param name="searchDate"></param>
 		/// <returns></returns>
-        private SaleListAndSearchDate GetSalesListByDate(DateTime searchDate)
+        private JsonResult GetSalesListByDate(DateTime searchDate)
 		{
 			SaleService salesService = new SaleService();
 
 			List<Sale> saleList = salesService.ListSalesByDate(searchDate);
 
+            if (!string.IsNullOrEmpty(salesService.LastErrorMessage))
+            {
+                Response.StatusCode = 500;
+                Response.StatusDescription = salesService.LastErrorMessage;
+                return Json(null);
+            }
+            else
+            {
 			List<SaleModel> viewList = saleList.Select(s => MapSaleToSaleModel(s)).ToList();
 
 			JavaScriptSerializer js = new JavaScriptSerializer();
             SaleListAndSearchDate jsonData = new SaleListAndSearchDate() { SaleList = viewList, SearchDate = searchDate.ToShortDateString() };
-			return jsonData;
-		} 
+			return Json(jsonData);
+
+            }
+        } //SaleListAndSearchDate
 
 		#endregion Private methods
 
